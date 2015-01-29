@@ -4,7 +4,10 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-cli": "*",
-    "grunt-contrib-jshint": "*"
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-contrib-connect" : "*",
+    "grunt-contrib-copy": "*"
   },
   "scripts": {
     "test": "grunt --verbose"
