@@ -3,8 +3,17 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     jshint: {
-      allFiles: ['Gruntfile.js', 'hello.js'],
-      jshintrc: 'rules.jshintrc'
+	    options: {
+	      curly: true,
+	      eqeqeq: true,
+	      eqnull: true,
+	      browser: true,
+	      globals: {
+	        jQuery: true
+	      },
+	    },
+      //allFiles: ['js/src/ng/**/*.js']
+      allFiles: ['hello.js']
     },
 	qunit: {
 	    all: ['test/**/*.html']
@@ -31,6 +40,36 @@ module.exports = function(grunt) {
 	      dest: 'test/angularCode.js',
 	    },
 	  },
+
+	  connect: {
+	    test : {
+	      port : 8000
+	    }
+	  },
+	  jasmine: {
+	    taskName: {
+	      src: [
+	      	'js/src/lib/angular.min.js',
+	      	'js/src/lib/angular.route.min.js',
+	      	'js/src/lib/angular-mocks.js',
+	      	'js/src/ng/controllers/*.js',
+	      	'js/src/ng/app.js'
+	      ],
+	      options: {
+	      	keepRunner: true,
+	        specs: 'test-jasmine/spec.js',
+	        host: 'http://127.0.0.1:8000/',
+	        template: require('grunt-template-jasmine-requirejs'),
+	        templateOptions: {
+	          requireConfigFile: 'js/main.js',
+	          requireConfig: {
+	          	baseUrl: "js/src/",
+	          },
+	        }
+	      }
+	    },
+	  }
+
   });
  
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -39,6 +78,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', ['copy', 'jshint', 'qunit']);
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+
+  grunt.registerTask('default', ['jshint', 'connect', 'jasmine']);
  
 };

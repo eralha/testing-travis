@@ -7,7 +7,10 @@
     "grunt-contrib-jshint": "*",
     "grunt-contrib-qunit": "*",
     "grunt-contrib-concat" : "*",
-    "grunt-contrib-copy": "*"
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-template-jasmine-requirejs": "*",
+    "grunt-contrib-jasmine": ""
   },
   "scripts": {
     "test": "grunt --verbose"
