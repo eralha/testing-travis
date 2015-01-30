@@ -6,14 +6,6 @@ module.exports = function(grunt) {
       allFiles: ['Gruntfile.js', 'hello.js'],
       jshintrc: 'rules.jshintrc'
     },
-    connect: {
-	    server: {
-	      options: {
-	        port: 8000,
-	        base: '.'
-	      }
-	    }
-	  },//end connect
 	qunit: {
 	    all: ['test/**/*.html']
 	  },//end qunit
@@ -23,37 +15,30 @@ module.exports = function(grunt) {
 	    dest: 'test/',
 	  },
 	},//end copy
-	jasmine: {
-	    taskName: {
+	concat: {
+	    options: {
+	      separator: '\n',
+	    },
+	    dist: {
 	      src: [
-	      	'test-jasmine/js/src/lib/angular.min.js',
-	      	'test-jasmine/js/src/lib/angular.route.min.js',
-	      	'test-jasmine/js/src/lib/angular.animate.min.js',
-	      	'test-jasmine/js/src/lib/angular-mocks.js',
-	      	'test-jasmine/js/src/ng/controllers/*.js',
-	      	'test-jasmine/js/src/ng/app.js',
+	      	'js/src/lib/angular.min.js',
+	      	'js/src/lib/angular.animate.min.js',
+	      	'js/src/lib/angular.route.min.js',
+	      	'js/src/lib/angular.mocks.js',
+//	      	'js/src/lib/require.js',
+	      	'js/src/ng/**/*.js'
 	      	],
-	      options: {
-	        specs: 'test-jasmine/*Spec.js',
-	        host: 'http://127.0.0.1:8000/',
-	        template: require('grunt-template-jasmine-requirejs'),
-	        templateOptions: {
-	          requireConfigFile: 'test-jasmine/js/main.js',
-	          requireConfig: {
-	            baseUrl: 'test-jasmine/js/src/'
-	          }
-	        }
-	      }
-	    }
-	  }
+	      dest: 'test/angularCode.js',
+	    },
+	  },
   });
  
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-  grunt.registerTask('default', ['copy', 'connect', 'jshint', 'qunit']);
+  grunt.registerTask('default', ['copy', 'jshint', 'qunit']);
  
 };

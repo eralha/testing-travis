@@ -6,7 +6,7 @@
     "grunt-cli": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-qunit": "*",
-    "grunt-contrib-connect" : "*",
+    "grunt-contrib-concat" : "*",
     "grunt-contrib-copy": "*"
   },
   "scripts": {
