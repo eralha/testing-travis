@@ -1,3 +1,9 @@
+
+function Person(){
+
+}
+
+
 test('Deve instanciar um objecto Person', function() {
   var pessoa = new Person("Emanuel", "Ralha", 28);
   expect(1);

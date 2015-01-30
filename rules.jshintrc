@@ -1,0 +1,11 @@
+{
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "camelcase": true,
+  "maxlen": 5,
+  "globals": {
+    "jQuery": true
+  }
+}
