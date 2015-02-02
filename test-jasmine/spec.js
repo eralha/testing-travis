@@ -1,54 +1,43 @@
+var wl = startTests;
+startTests = function(){};
 
-describe('Testing Compadres Auth', function() {
-  var testEngine, testModule;
-  var $httpBackend, $rootScope, createController, requestHandler, $injector;
+/*
+ * Here we load all files in amd that our app may need
+ */
+  setTimeout(function(){
 
-  beforeEach(function(){
-    testEngine = {};
-    testModule = angular.module('test', ['app', 'ngMockE2E']);
+    require(['js/src/lib/angular-mocks.js'], function(){
 
-    $injector = angular.injector(['ng', 'test']);
+      describe('Testing Compadres Auth', function() {
+        var testEngine, testModule;
+        var $httpBackend, $rootScope, createController, requestHandler, $injector;
 
-    $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.whenGET(/views/).respond('');
+        beforeEach(function(){
+          testEngine = {};
+          testModule = angular.module('test', ['app', 'ngMockE2E']);
+          $injector =  angular.injector(['ng', 'test']);
 
-    // Get hold of a scope (i.e. the root scope)
-    $rootScope = $injector.get('$rootScope');
-    // The $controller service is used to create instances of controllers
-    var $controller = $injector.get('$controller');
+          $httpBackend = $injector.get('$httpBackend');
+          $httpBackend.whenGET(/views/).respond('sdfsdfsdf');
 
-    createController = function(controllerName) {
-      return $controller(controllerName, {'$scope' : $rootScope });
-    };
+           // Get hold of a scope (i.e. the root scope)
+           $rootScope = $injector.get('$rootScope');
+           // The $controller service is used to create instances of controllers
+           var $controller = $injector.get('$controller');
 
-  });   
-
-  afterEach(function() {
-     $httpBackend.verifyNoOutstandingExpectation();
-     $httpBackend.verifyNoOutstandingRequest();
-   });
+           createController = function(controllerName) {
+             return $controller(controllerName, {'$scope' : $rootScope });
+           };
+        });   
 
 
-  it('Testing rootScoope should be available', function() {
+        it('should fail to read data', function() {
+          var srv = $injector.get('testeService');
+          expect(srv.rotasLoaded).toEqual('Error loading');
+        });
+      });//end describe
 
-    var ctrl = createController('myCtrl');
+      wl();
+    });//end require
 
-    expect($rootScope.helloWorld()).toEqual('Hello');
-    expect(ctrl.hello()).toEqual('Hello');
-
-  });
-
-  it('Testing rootscoot availability should be undefined', function() {
-
-    expect($rootScope.helloWorld).toEqual(undefined);
-
-  });
-
-  it('Testing amd controller, should have access to controller', function() {
-
-    var ctrl = createController('HomeViewController');
-    expect($rootScope.getPageHeading()).toEqual("Welcome");
-
-  });
-
-});
+  }, 2000);
