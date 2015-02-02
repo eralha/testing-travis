@@ -8,15 +8,17 @@ startTests = function(){};
 
     require(['js/src/lib/angular-mocks.js'], function(){
 
-      describe('Testing Compadres Auth', function() {
+      describe('Testing angular dependencing injection', function() {
         var testEngine, testModule;
-        var $httpBackend, $rootScope, createController, requestHandler, $injector;
+        var $httpBackend, $rootScope, createController, requestHandler;
 
         beforeEach(function(){
           testEngine = {};
           testModule = angular.module('test', ['app', 'ngMockE2E']);
-          $injector =  angular.injector(['ng', 'test']);
+          module('test');
+        });   
 
+        beforeEach(inject(function($injector){
           $httpBackend = $injector.get('$httpBackend');
           $httpBackend.whenGET(/views/).respond('sdfsdfsdf');
 
@@ -28,13 +30,13 @@ startTests = function(){};
            createController = function(controllerName) {
              return $controller(controllerName, {'$scope' : $rootScope });
            };
-        });   
+        }));   
 
 
-        it('should fail to read data', function() {
-          var srv = $injector.get('testeService');
+        it('should fail to read data', inject(function(testeService) {
+          var srv = testeService;
           expect(srv.rotasLoaded).toEqual(null);
-        });
+        }));
       });//end describe
 
       wl();

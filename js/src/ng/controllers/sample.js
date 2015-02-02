@@ -1,4 +1,4 @@
-define(['ng/app'], function(app)
+define(['app'], function(app)
 {
 	app.controller('HomeViewController', ['$scope', function($scope){
         $scope.page =
