@@ -33,7 +33,7 @@ startTests = function(){};
 
         it('should fail to read data', function() {
           var srv = $injector.get('testeService');
-          expect(srv.rotasLoaded).toEqual('Error loading');
+          expect(srv.rotasLoaded).toEqual(null);
         });
       });//end describe
 
