@@ -49,21 +49,23 @@ module.exports = function(grunt) {
 	  jasmine: {
 	    taskName: {
 	      src: [
-	      	'js/src/lib/angular.min.js',
-	      	'js/src/lib/angular.route.min.js',
-	      	'js/src/lib/angular-mocks.js',
-	      	'js/src/ng/controllers/*.js',
-	      	'js/src/ng/app.js'
-	      ],
+	      ],//This files are being loaded by our main.js declared in vendors
 	      options: {
 	      	keepRunner: true,
 	        specs: 'test-jasmine/spec.js',
 	        host: 'http://127.0.0.1:8000/',
+	        vendor: [
+	          "http://maps.googleapis.com/maps/api/js?sensor=false&language=pt",
+	          "js/main.js"
+	        ],
 	        template: require('grunt-template-jasmine-requirejs'),
 	        templateOptions: {
-	          requireConfigFile: 'js/main.js',
+	          
 	          requireConfig: {
 	          	baseUrl: "js/src/",
+	          	"paths": {
+				    "app": "ng/app",
+				  },
 	          },
 	        }
 	      }

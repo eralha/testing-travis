@@ -1,6 +1,6 @@
-define(['ng/routes','services/dependencyResolverFor'], function(config, dependencyResolverFor)
+define(['ng/routes','services/dependencyResolverFor', 'services/main_srvc'], function(config, dependencyResolverFor, services)
 {
-    var app = angular.module('app', ['ngRoute']);
+    var app = angular.module('app', ['ngRoute', 'app.Services']);
 
     app.config(
     [
